@@ -1,7 +1,29 @@
 {% extends 'base.html' %}
+{% load static %}
 
 {% block title %}Main{% endblock %}
 
 {% block content %}
-    <h1>환영합니다</h1>
+    <div class="container">
+        <div class="left-box">
+            <p>동아리 여기여기 모여라</p>
+            <div style="margin-bottom: 3%">
+                <span style="font-weight: 700; font-size: 3rem">동아리 홍보 어디서 하지?</span><br />
+                <span style="font-weight: 700; font-size: 3rem">어떤 동아리에 지원할까?</span>
+            </div>
+            <div>
+                <span style="font-weight: 100">쪼인동이 여러분의 고민을 해결해드립니다!</span><br />
+                <span style="font-weight: 100">여러분의 동아리를 쪼인동에서 홍보해서 함께하고 싶은 분을 직접 모집해보세요!</span><br />
+                <span style="font-weight: 100">여러 동아리들을 둘러보고 함께하고 싶은 동아리를 택해 신청해보세요!</span>
+            </div>
+            <div class="btn-group">
+                <button type="button" style="width:150px; background-color: #74b9ff; margin-right: 10px">동아리 만들기</button>
+                <button type="button" style="width:170px; background-color: #ff7675;">동아리 둘러보기</button>
+            </div>
+        </div>
+        <div class="right-box">
+            <img src="{% static 'img/main_image.png' %}" width="500" height="400" alt="main image">
+        </div>
+    </div>
+
 {% endblock %}
