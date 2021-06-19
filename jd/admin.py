@@ -1,3 +1,7 @@
 from django.contrib import admin
+from jd.models import *
 
-# Register your models here.
+admin.site.register(Club)
+admin.site.register(Message)
+
+
