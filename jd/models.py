@@ -11,6 +11,9 @@ class Club(models.Model):
     deadline = models.DateTimeField()
     head_num = models.IntegerField(default=1)
 
+    class Meta:
+        verbose_name_plural = 'Clubs'
+
     def __str__(self):  # admin 사이트에서 보여지는 항목 이름
         return self.title
 
