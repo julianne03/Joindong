@@ -10,6 +10,6 @@
             <input type="password" placeholder="Enter password" name="password" id="password" value="{{ form.password.value|default_if_none:'' }}">
             <button type="submit" class="login_btn">Sign in</button>
         </form>
-{#        <span class="login_bottom_text">아직 회원이 아니십니까?&nbsp;&nbsp;<a class="go_signup" href="{% url 'account:signup' %}">회원가입</a></span>#}
+        <span class="login_bottom_text">아직 회원이 아니십니까?&nbsp;&nbsp;<a class="go_signup" href="{% url 'account:signup' %}">회원가입</a></span>
     </div>
 {% endblock %}
