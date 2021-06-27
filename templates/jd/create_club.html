@@ -1,0 +1,19 @@
+{% extends 'base.html' %}
+{% block content %}
+    <div class="center-box">
+        <h3>동아리 만들기</h3>
+        <form method="post" class="login_form" enctype="multipart/form-data">
+            {% csrf_token %}
+            {% include 'form_errors.html' %}
+            <input type="text" placeholder="Enter title" name="title" value="{{ form.title.value|default_if_none:'' }}">
+            <input type="file" name="main_poster_image" value="{{ form.main_poster.value|default_if_none:'' }}" accept="image/*">
+            <input type="text" placeholder="Enter description" name="description" value="{{ form.description.value|default_if_none:'' }}">
+            <input type="text" placeholder="Enter activities" name="activities" value="{{ form.activities.value|default_if_none:'' }}">
+            <input type="text" placeholder="Enter good things" name="good_things" value="{{ form.good_things.value|default_if_none:'' }}">
+            <input type="text" placeholder="Enter etc things" name="etc_things" value="{{ form.etc_things.value|default_if_none:'' }}">
+            <input type="date" placeholder="Enter deadline" name="deadline" value="{{ form.deadline.value|default_if_none:'' }}">
+            <input type="number" placeholder="Enter head num" name="head_num" value="{{ form.head_num.value|default_if_none:'' }}">
+            <button type="submit" class="login_btn">Create</button>
+        </form>
+    </div>
+{% endblock %}
