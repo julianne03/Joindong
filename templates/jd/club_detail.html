@@ -1,0 +1,60 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}Main{% endblock %}
+
+{% block content %}
+    <div style="width: 100%; background-color: #ff7675; padding-top: 0.5%; padding-bottom: 0.5%; text-align: center">
+        <span style="color: white;">모집기간 : {{ club.deadline }}까지</span>
+    </div>
+    <div style="margin-left: 10%; margin-right: 10%">
+        <div class="detail-box" style="margin-top: 5%">
+            <div>
+                <span style="font-weight: 700; font-size: 2rem;">{{ club.title }}</span><br/>
+            </div>
+            <div>
+                <div style="float: left; width: 30%; margin-right: 3%">
+                    <img src="{{ club.main_poster.url }}" style="width: 100%; height: auto"><br/>
+                    <button type="button" style="width: 100%; margin-top: 5%">지원하기</button>
+                </div>
+                <div style="display: inline-block; width: 67%;">
+                    <div>
+                        <span style="font-weight: 700; font-size: 1.3rem">설명</span><br/>
+                        <span>{{ club.description }}</span>
+                    </div>
+                    <div>
+                        <span style="font-weight: 700; font-size: 1.3rem">동아리 장점</span><br/>
+                        <span>{{ club.good_things }}</span>
+                    </div>
+                    <div>
+                        <span style="font-weight: 700; font-size: 1.3rem">동아리 활동</span><br/>
+                        <span>{{ club.activities }}</span><br/>
+                    </div>
+                    {% if club.etc_things %}
+                        <div>
+                            <span style="font-weight: 700; font-size: 1.3rem">기타 사항</span><br/>
+                            <span>{{ club.etc_things }}</span><br/>
+                        </div>
+                    {% endif %}
+                    <div>
+                        <span style="font-weight: 700; font-size: 1.3rem">모집 인원</span><br/>
+                        <span>{{ club.head_num }}명</span><br/>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div style="display:flex; width: 100%; flex-direction: column">
+            <span style="font-weight: 700; font-size: 2rem;">Member</span><br/>
+            {% for member in members %}
+            <div style="text-align: center">
+                <img src="{{ member.profile.image.url }}" style="border-radius: 50%; width: 200px; height: 200px">
+                <span>{{ member.profile.nickname }}님</span>
+            </div>
+            {% endfor %}
+
+        </div>
+    </div>
+
+
+
+{% endblock %}
