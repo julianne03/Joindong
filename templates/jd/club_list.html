@@ -6,21 +6,23 @@
 {% block content %}
     <div style="margin-left: 10%; margin-right: 10%">
         <div style="margin-top: 5%">
-            <span style="font-weight: 700; font-size: 2rem">어떤 동아리가 나를 기다리고 있을까?</span><br />
-            <span>현재 실제로 운영중인 동아리들을 둘러보세요!</span><br />
+            <span style="font-weight: 700; font-size: 2rem">어떤 동아리가 나를 기다리고 있을까?</span><br/>
+            <span>현재 실제로 운영중인 동아리들을 둘러보세요!</span><br/>
             <div style="height: 1px; background-color: black"></div>
         </div>
         <div class="row row-cols-4" style="margin-top: 5%">
             {% for club in list %}
-            <div class="col" style="margin-bottom: 3%">
-                <div class="card">
-                    <img class="card-img-top" src="{{ club.main_poster.url }}" width="200" height="250">
-                    <div class="card-body">
-                        <h5 class="card-title">{{ club.title }}</h5>
-                        <p class="card-text">{{ club.description }}</p>
-                    </div>
+                <div class="col" style="margin-bottom: 3%">
+                    <a style="text-decoration: none; color: black" href="{% url 'jd:club_detail' club.title %}">
+                        <div class="card">
+                            <img class="card-img-top" src="{{ club.main_poster.url }}" width="200" height="250">
+                            <div class="card-body">
+                                <h5 class="card-title">{{ club.title }}</h5>
+                                <p class="card-text">{{ club.description }}</p>
+                            </div>
+                        </div>
+                    </a>
                 </div>
-            </div>
             {% endfor %}
         </div>
 
