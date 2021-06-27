@@ -43,16 +43,6 @@
                 </div>
             </div>
         </div>
-        <div style="display:flex; width: 100%; flex-direction: column">
-            <span style="font-weight: 700; font-size: 2rem;">Member</span><br/>
-            {% for member in members %}
-                <div style="text-align: center">
-                    <img src="{{ member.profile.image.url }}" style="border-radius: 50%; width: 200px; height: 200px">
-                    <span>{{ member.profile.nickname }}님</span>
-                </div>
-            {% endfor %}
-
-        </div>
     </div>
 
 
