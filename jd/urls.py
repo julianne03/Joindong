@@ -6,5 +6,5 @@ app_name = 'jd'
 
 urlpatterns = [
     path('', views.index, name='index'),
-    path('/club_list', views.club_list, name='club_list'),
+    path('club_list/', views.club_list, name='club_list'),
 ]

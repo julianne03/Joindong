@@ -34,3 +34,81 @@
     margin-left: 10%;
     margin-right: 5%;
 }
+
+.center-box {
+    padding: 0;
+    margin: 0;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    align-content: center;
+    justify-content: center;
+}
+
+.login_form {
+    display: flex;
+    flex-direction: column;
+    width: 60%;
+    height: auto;
+    align-items: center;
+}
+
+.login_form input {
+  background: none;
+  appearance: none;
+  border: 0;
+  font-size: 22px;
+  color: black;
+    width: 100%;
+  border-bottom: 2px solid black;
+  text-align: center;
+  margin-bottom: 8%;
+}
+
+.login_form input::placeholder {
+  color: black;
+  text-align: center;
+}
+
+.login_form input:focus,
+.login_form input:active {
+  outline: none;
+}
+
+.login_btn {
+    padding: 16px 30px;
+    border: none;
+    border-radius: 100px;
+    width: 30%;
+    text-align: center;
+    font-size: large;
+    cursor: pointer;
+    color: white;
+    background-color: #8eefcf;
+    box-shadow: 0px 15px 20px rgba(46, 229, 157, 0.4);
+}
+
+.login_btn:hover {
+    background-color: #2ee59d;
+    box-shadow: 0px 15px 20px rgba(46, 229, 157, 0.4);
+}
+
+.login_btn:focus,
+.login_btn:active {
+  outline: none;
+}
+
+.go_signup {
+    text-decoration: none;
+    color: blue;
+}
+
+.login_bottom_text {
+    margin-top: 2%;
+}
+
+.username_input {
+    margin-top: 7%;
+}
