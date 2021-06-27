@@ -35,3 +35,11 @@ def create_club(request):
     else:
         form = ClubForm()
     return render(request, 'jd/create_club.html', {'form': form})
+
+
+@login_required(login_url='account:login')
+def detail_club(request, club_title):
+    club = Club.objects.get(title=club_title)
+    members = User.objects.filter(profile__club__title=club.title, profile__is_club_staff=True)
+    context = {'club': club, 'members': members}
+    return render(request, 'jd/club_detail.html', context)
