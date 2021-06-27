@@ -11,9 +11,9 @@ def signup(request):
             form.save()
             username = form.cleaned_data.get('username')
             raw_password = form.cleaned_data.get('password1')
-            user = authenticate(username=username, pasword=raw_password)
+            user = authenticate(username=username, password=raw_password)
             login(request, user)
-            return redirect('jd:index')
-        else:
-            form = UserForm()
-        return render(request, 'account/signup.html', {'form': form})
+            return redirect('account:profile_signup')
+    else:
+        form = UserForm()
+    return render(request, 'account/signup.html', {'form': form})
