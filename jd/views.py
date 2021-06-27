@@ -1,6 +1,8 @@
 from django.contrib.auth.decorators import login_required
+from django.contrib.auth.models import User
 from django.shortcuts import render, redirect
 
+from account.models import Profile
 from jd.forms import ClubForm
 from jd.models import Club
 
@@ -9,6 +11,7 @@ def index(request):
     return render(request, 'jd/index.html')
 
 
+@login_required(login_url='account:login')
 def club_list(request):
     clubs = Club.objects.order_by('deadline')
     context = {'list': clubs}
@@ -24,7 +27,11 @@ def create_club(request):
             club.creator = request.user
             club.main_poster = request.FILES['main_poster_image']
             club.save()
-            return redirect('jd:club_list')
+            profile = Profile.objects.get(user=request.user)
+            profile.club = club
+            profile.is_club_staff = True
+            profile.save()
+        return redirect('jd:club_list')
     else:
         form = ClubForm()
     return render(request, 'jd/create_club.html', {'form': form})
