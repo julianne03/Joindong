@@ -47,34 +47,9 @@
     justify-content: center;
 }
 
-.login_form {
-    display: flex;
-    flex-direction: column;
-    width: 60%;
-    height: auto;
-    align-items: center;
-}
-
-.login_form input {
-  background: none;
-  appearance: none;
-  border: 0;
-  font-size: 22px;
-  color: black;
-    width: 100%;
-  border-bottom: 2px solid black;
-  text-align: center;
-  margin-bottom: 8%;
-}
-
-.login_form input::placeholder {
-  color: black;
-  text-align: center;
-}
-
-.login_form input:focus,
-.login_form input:active {
-  outline: none;
+.input-text {
+    background-color: rgb(234,237,238);
+    border: none;
 }
 
 .login_btn {

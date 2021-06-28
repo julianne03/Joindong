@@ -1,19 +1,62 @@
 {% extends 'base.html' %}
 {% block content %}
     <div class="center-box">
-        <h3>동아리 만들기</h3>
-        <form method="post" class="login_form" enctype="multipart/form-data">
+        <div class="mt-5 mb-5">
+            <h3>동아리 만들기</h3>
+        </div>
+        <form method="post" style="width: 80%" enctype="multipart/form-data">
             {% csrf_token %}
             {% include 'form_errors.html' %}
-            <input type="text" placeholder="Enter title" name="title" value="{{ form.title.value|default_if_none:'' }}">
-            <input type="file" name="main_poster_image" value="{{ form.main_poster.value|default_if_none:'' }}" accept="image/*">
-            <input type="text" placeholder="Enter description" name="description" value="{{ form.description.value|default_if_none:'' }}">
-            <input type="text" placeholder="Enter activities" name="activities" value="{{ form.activities.value|default_if_none:'' }}">
-            <input type="text" placeholder="Enter good things" name="good_things" value="{{ form.good_things.value|default_if_none:'' }}">
-            <input type="text" placeholder="Enter etc things" name="etc_things" value="{{ form.etc_things.value|default_if_none:'' }}">
-            <input type="date" placeholder="Enter deadline" name="deadline" value="{{ form.deadline.value|default_if_none:'' }}">
-            <input type="number" placeholder="Enter head num" name="head_num" value="{{ form.head_num.value|default_if_none:'' }}">
-            <button type="submit" class="login_btn">Create</button>
+            <div class="mb-3">
+                <label for="title" class="form-label">동아리 이름</label>
+                <input type="text" style="background-color: rgb(239,242,243); border: none" class="form-control"
+                       placeholder="동아리 이름을 입력하세요" name="title" id="title"
+                       value="{{ form.title.value|default_if_none:'' }}">
+            </div>
+            <div class="mb-3">
+                <label for="main_poster_image" class="form-label">동아리 메인 포스터</label>
+                <input type="file" style="background-color: rgb(239,242,243); border: none" class="form-control"
+                       name="main_poster_image" id="main_poster_image"
+                       value="{{ form.main_poster.value|default_if_none:'' }}"
+                       accept="image/*">
+            </div>
+            <div class="mb-3">
+                <label for="description" class="form-label">동아리 간단 설명</label>
+                <input type="text" style="background-color: rgb(239,242,243); border: none" class="form-control"
+                       placeholder="동아리를 간단하게 설명해주세요" name="description" id="description"
+                       value="{{ form.description.value|default_if_none:'' }}">
+            </div>
+            <div class="mb-3">
+                <label for="activities" class="form-label">동아리 활동</label>
+                <textarea style="background-color: rgb(239,242,243); border: none" class="form-control" rows="8"
+                          placeholder="동아리에서 하는 활동들을 입력해주세요" name="activities" id="activities"
+                >{{ form.activities.value|default_if_none:'' }}</textarea>
+            </div>
+            <div class="mb-3">
+                <label for="good_things" class="form-label">동아리 장점</label>
+                <textarea style="background-color: rgb(239,242,243); border: none" class="form-control" rows="8"
+                          placeholder="동아리의 장점을 입력해주세요" name="good_things" id="good_things"
+                >{{ form.good_things.value|default_if_none:'' }}</textarea>
+            </div>
+            <div class="mb-3">
+                <label for="etc_things" class="form-label">기타 사항</label>
+                <textarea style="background-color: rgb(239,242,243); border: none" class="form-control" rows="8"
+                          placeholder="기타 사항을 입력해주세요" name="etc_things"
+                          id="etc_things">{{ form.etc_things.value|default_if_none:'' }}</textarea>
+            </div>
+            <div class="mb-3">
+                <label for="deadline" class="form-label">동아리 모집기간</label>
+                <input type="date" style="background-color: rgb(239,242,243); border: none" class="form-control"
+                       placeholder="모집기간을 입력해주세요" name="deadline" id="deadline"
+                       value="{{ form.deadline.value|default_if_none:'' }}">
+            </div>
+            <div class="mb-3">
+                <label for="head_num" class="form-label">동아리 모집인원</label>
+                <input type="number" style="background-color: rgb(239,242,243); border: none" class="form-control"
+                       placeholder="모집인원을 입력해주세요" name="head_num" id="head_num"
+                       value="{{ form.head_num.value|default_if_none:'' }}">
+            </div>
+            <button type="submit" style="margin-top: 5%; margin-bottom: 3%; width: 100%" class="login_btn">Create</button>
         </form>
     </div>
 {% endblock %}

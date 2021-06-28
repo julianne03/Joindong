@@ -2,13 +2,20 @@
 {% block content %}
     <div class="center-box">
         <h3 style="margin-top: 10%">로그인</h3>
-        <form class="login_form" method="post" action="{% url 'account:login' %}">
+        <form style="width: 40%" method="post" action="{% url 'account:login' %}">
             {% csrf_token %}
             {% include 'form_errors.html' %}
             <input type="hidden" name="text" value="{{ next }}">
-            <input class="username_input" type="text" placeholder="Enter username" name="username" id="username" value="{{ form.username.value|default_if_none:'' }}">
-            <input type="password" placeholder="Enter password" name="password" id="password" value="{{ form.password.value|default_if_none:'' }}">
-            <button type="submit" class="login_btn">Sign in</button>
+            <div class="mt-3">
+                <input class="form-control form-control-lg" type="text" placeholder="Enter username" name="username"
+                       id="username" value="{{ form.username.value|default_if_none:'' }}">
+            </div>
+            <div class="mt-3">
+                <input class="form-control form-control-lg" type="password" placeholder="Enter password" name="password"
+                       id="password" value="{{ form.password.value|default_if_none:'' }}">
+            </div>
+            <button type="submit" class="login_btn" style="margin-top: 10%; margin-bottom: 3%; width: 100%;">Sign in
+            </button>
         </form>
         <span class="login_bottom_text">아직 회원이 아니십니까?&nbsp;&nbsp;<a class="go_signup" href="{% url 'account:signup' %}">회원가입</a></span>
     </div>

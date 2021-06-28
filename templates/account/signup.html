@@ -1,15 +1,28 @@
 {% extends 'base.html' %}
 {% block content %}
     <div class="center-box">
-        <h3>Sign up</h3>
-        <form method="post" class="login_form">
-                {% csrf_token %}
-                {% include 'form_errors.html' %}
-                <input class="username_input" type="text" placeholder="Enter username" name="username" value="{{ form.username.value|default_if_none:'' }}">
-                <input type="password" placeholder="Enter password" name="password1" value="{{ form.password.value|default_if_none:'' }}">
-                <input type="password" placeholder="Confirm password" name="password2" value="{{ form.password2.value|default_if_none:'' }}">
-                <input type="email" placeholder="Enter email" name="email" value="{{ form.email.value|default_if_none:'' }}">
-                <button type="submit" class="login_btn">Next</button>
+        <h3 style="margin-top: 7%">회원가입</h3>
+        <form style="width: 40%" method="post" action="{% url 'account:signup' %}">
+            {% csrf_token %}
+            {% include 'form_errors.html' %}
+            <div class="mt-3">
+                <input class="form-control form-control-lg" type="text" placeholder="Enter username" name="username"
+                       id="username" value="{{ form.username.value|default_if_none:'' }}">
+            </div>
+            <div class="mt-3">
+                <input class="form-control form-control-lg" type="password" placeholder="Enter password" name="password1"
+                       id="password1" value="{{ form.password.value|default_if_none:'' }}">
+            </div>
+            <div class="mt-3">
+                <input class="form-control form-control-lg" type="password" placeholder="Enter confirm password" name="password2"
+                       id="password2" value="{{ form.password2.value|default_if_none:'' }}">
+            </div>
+            <div class="mt-3">
+                <input class="form-control form-control-lg" type="email" placeholder="Enter email" name="email"
+                       id="email" value="{{ form.email.value|default_if_none:'' }}">
+            </div>
+            <button type="submit" class="login_btn" style="margin-top: 10%; margin-bottom: 3%; width: 100%;">Sign in
+            </button>
         </form>
         <span class="login_bottom_text">회원이십니까?&nbsp;&nbsp;<a class="go_signup" href="{% url 'account:login' %}">로그인</a></span>
     </div>
