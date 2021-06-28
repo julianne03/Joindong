@@ -1,0 +1,37 @@
+{% extends 'base.html' %}
+{% block content %}
+    <div class="center-box">
+        <div class="mt-5 mb-5">
+            <h3>동아리 메세지 만들기</h3>
+        </div>
+        <form method="post" style="width: 80%" enctype="multipart/form-data">
+            {% csrf_token %}
+            {% include 'form_errors.html' %}
+            <div class="mb-3">
+                <label for="plan_message" class="form-label">일정 메세지</label>
+                <textarea style="background-color: rgb(239,242,243); border: none" class="form-control" rows="8"
+                          placeholder="동아리 지원 후 프로세스(일정)를 입력해주세요" name="plan_message" id="plan_message"
+                >{{ form.plan_message.value|default_if_none:'' }}</textarea>
+            </div>
+            <div class="mb-3">
+                <label for="pass_message" class="form-label">합격 메세지</label>
+                <textarea style="background-color: rgb(239,242,243); border: none" class="form-control" rows="8"
+                          placeholder="합격했을 때 보낼 합격 메세지를 입력해주세요" name="pass_message" id="pass_message"
+                >{{ form.pass_message.value|default_if_none:'' }}</textarea>
+            </div>
+            <div class="mb-3">
+                <label for="non_pass_message" class="form-label">불합격 메세지</label>
+                <textarea style="background-color: rgb(239,242,243); border: none" class="form-control" rows="8"
+                          placeholder="불합격했을 때 보낼 불합격 메세지를 입력해주세요" name="non_pass_message" id="non_pass_message"
+                >{{ form.non_pass_message.value|default_if_none:'' }}</textarea>
+            </div>
+            <div class="mb-3">
+                <label for="send_date" class="form-label">메세지 전송 날짜</label>
+                <input type="date" style="background-color: rgb(239,242,243); border: none" class="form-control"
+                       placeholder="메세지를 보낼 날짜를 입력해주세요" name="send_date" id="send_date"
+                       value="{{ form.send_date.value|default_if_none:'' }}">
+            </div>
+            <button type="submit" style="margin-top: 5%; margin-bottom: 3%; width: 100%" class="login_btn">Create</button>
+        </form>
+    </div>
+{% endblock %}

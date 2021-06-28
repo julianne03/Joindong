@@ -1,5 +1,6 @@
 from django.contrib.auth.models import User
 from django.db import models
+from django.utils import timezone
 
 
 class Club(models.Model):
@@ -22,10 +23,10 @@ class Club(models.Model):
 
 class Message(models.Model):
     club = models.ForeignKey(Club, on_delete=models.CASCADE)
-    plan_message = models.TextField()
-    pass_message = models.TextField()
-    non_pass_message = models.TextField()
-    send_date = models.DateTimeField()
+    plan_message = models.TextField(blank=True)
+    pass_message = models.TextField(blank=True)
+    non_pass_message = models.TextField(blank=True)
+    send_date = models.DateTimeField(blank=True, default=timezone.now)
 
     def __str__(self):
         return f'{self.club} message'
