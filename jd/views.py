@@ -41,7 +41,7 @@ def create_club(request):
 @login_required(login_url='account:login')
 def detail_club(request, club_title):
     club = Club.objects.get(title=club_title)
-    members = User.objects.filter(profile__club__title=club.title, profile__is_club_staff=True)
+    members = User.objects.filter(profile__club=club, profile__is_club_staff=True)
     context = {'club': club, 'members': members}
     return render(request, 'jd/club_detail.html', context)
 
@@ -50,9 +50,12 @@ def detail_club(request, club_title):
 @login_required(login_url='account:login')
 def my_club(request, user_name):
     user = User.objects.get(username=user_name)
+    members = User.objects.filter(profile__club=user.profile.club, profile__is_club_staff=True)
+    applicants = User.objects.filter(profile__club=user.profile.club, profile__is_club_staff=False)
+
     if request.user.username == user_name:
         if user.profile.club:
-            context = {'user': user, 'club': user.profile.club}
+            context = {'user': user, 'club': user.profile.club, 'members': members, 'applicants': applicants}
             return render(request, 'jd/my_club.html', context)
         context = {'user': user, 'message': '현재 소속되어 있는 동아리가 없습니다'}
         return render(request, 'error_page.html', context)
