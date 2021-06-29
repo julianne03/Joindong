@@ -124,3 +124,10 @@ def cancel_apply_club(request, club_title):
     # is_club_staff -> False
     profile.save()
     return redirect('jd:club_detail', club_title=club.title)
+
+
+@login_required(login_url='account:login')
+def my_page(request, user_name):
+    user = User.objects.get(username=user_name)
+    context = {'user': user}
+    return render(request, 'jd/my_page.html', context)
