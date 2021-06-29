@@ -22,7 +22,7 @@ class Club(models.Model):
 
 
 class Message(models.Model):
-    club = models.ForeignKey(Club, on_delete=models.CASCADE)
+    club = models.OneToOneField(Club, on_delete=models.CASCADE)
     plan_message = models.TextField(blank=True)
     pass_message = models.TextField(blank=True)
     non_pass_message = models.TextField(blank=True)

@@ -10,12 +10,12 @@
             <span>현재 실제로 운영중인 동아리들을 둘러보세요!</span><br/>
             <div style="height: 1px; background-color: black"></div>
         </div>
-        <div class="row row-cols-4" style="margin-top: 5%">
+        <div class="row row-cols-3" style="margin-top: 5%">
             {% for club in list %}
                 <div class="col" style="margin-bottom: 3%">
                     <a style="text-decoration: none; color: black" href="{% url 'jd:club_detail' club.title %}">
                         <div class="card">
-                            <img class="card-img-top" src="{{ club.main_poster.url }}" width="200" height="250">
+                            <img class="card-img-top" src="{{ club.main_poster.url }}">
                             <div class="card-body">
                                 <h5 class="card-title">{{ club.title }}</h5>
                                 <p class="card-text">{{ club.description }}</p>

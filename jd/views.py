@@ -89,18 +89,11 @@ def update_club_message(request, club_title):
         context = {'message': '동아리 메세지 정보 수정권한이 없습니다!'}
         return render(request, 'error_page.html', context)
     if request.method == "POST":
-        if is_created:
-            form = MessageForm(request.POST, instance=message)
-        else:
-            form = MessageForm(request.POST)
+        form = MessageForm(request.POST, instance=message)
         if form.is_valid():
-            message = form.save(commit=False)
             message.save()
-            return redirect('jd:my_club', club_title=club.title)
+            return redirect('jd:my_club', user_name=request.user.username)
     else:
-        if is_created:
-            form = MessageForm(request.POST, instance=message)
-        else:
-            form = MessageForm(request.POST)
+        form = MessageForm(instance=message)
     context = {'form': form}
     return render(request, 'jd/create_club_message.html', context)
