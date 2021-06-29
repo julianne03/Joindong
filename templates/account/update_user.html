@@ -1,0 +1,38 @@
+{% extends 'base.html' %}
+{% block content %}
+    <div class="center-box">
+        <h3 style="margin-top: 7%">내 정보 수정</h3>
+        <form style="width: 40%" method="post" action="{% url 'account:update_user' request.user.username %}" enctype="multipart/form-data">
+            {% csrf_token %}
+            {% include 'form_errors.html' %}
+            <div class="mt-3">
+                <input class="form-control form-control-lg" type="text" placeholder="아이디를 입력해주세요" name="username"
+                       id="username" value="{{ user_change_form.username.value|default_if_none:'' }}">
+            </div>
+            <div class="mt-3">
+                <input class="form-control form-control-lg" type="email" placeholder="이메일을 입력해주세요" name="email"
+                       id="email" value="{{ user_change_form.email.value|default_if_none:'' }}">
+            </div>
+            <div class="mt-3">
+                <input class="form-control form-control-lg" type="number" placeholder="학번을 입력해주세요" name="st_num"
+                       id="st_num" value="{{ profile_form.st_num.value|default_if_none:'' }}">
+            </div>
+            <div class="mt-3">
+                <input class="form-control form-control-lg" type="text" placeholder="이름을 입력해주세요" name="nickname"
+                       id="nickname" value="{{ profile_form.nickname.value|default_if_none:'' }}">
+            </div>
+            <div class="mt-3">
+                <input type="file" class="form-control"
+                       name="profile_image" id="profile_image"
+                       value="{{ profile_form.image.value|default_if_none:'' }}"
+                       accept="image/*">
+            </div>
+            <div class="mt-3">
+                <input class="form-control form-control-lg" type="tel" placeholder="전화번호를 입력해주세요" name="phone_num"
+                       id="phone_num" value="{{ profile_form.phone_num.value|default_if_none:'' }}">
+            </div>
+            <button type="submit" class="login_btn" style="margin-top: 10%; margin-bottom: 3%; width: 100%;">Update
+            </button>
+        </form>
+    </div>
+{% endblock %}
