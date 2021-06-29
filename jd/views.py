@@ -78,7 +78,7 @@ def update_club(request, club_title):
             club.creator = request.user
             club.main_poster = request.FILES['main_poster_image']
             club.save()
-            return redirect('jd:club_detail', club_title=club.title)
+            return redirect('jd:my_club', user_name=request.user.username)
     else:
         form = ClubForm(instance=club)
     context = {'form': form}
