@@ -12,8 +12,8 @@
             </div>
             <div style="display: flex; flex-direction: row; width: 100%; height: auto;">
                 <div style="display: flex; flex-direction: column; float: left; width: 30%; height: auto; margin-right: 3%; align-self: center;">
-                    <img src="{{ user.profile.image.url }}" style="max-width: 100%; height: auto !important; border-radius: 50%;">
-                    <span class="fs-1 fw-bold">{{ user.profile.nickname }}님</span>
+                    <img src="{{ user.profile.image.url }}" style="max-width: 100%; height: 350px !important; border-radius: 50%;">
+                    <span class="fs-1 fw-bold mt-4">{{ user.profile.nickname }}님</span>
                     <span class="fs-4 text-muted mb-3">{{ user.username }}</span>
                     <span class="fs-6 text-muted">개인정보</span>
                     <span class="fs-5">{{ user.profile.st_num }}</span>
@@ -21,16 +21,20 @@
                     <span class="fs-5 mb-3">{{ user.email }}</span>
 
                     {% if user.profile.club %}
-                        <span class="fs-6 text-muted">동아리</span>
                         {% if user.profile.is_club_staff %}
+                        <span class="fs-6 text-muted">동아리</span>
                         <a class="mb-3" href="{% url 'jd:club_detail' user.profile.club.title %}">{{ user.profile.club.title }}</a>
                         {% else %}
-                        <a class="mb-3" href="{% url 'jd:club_detail' user.profile.club.title %}">지원 중 : {{ user.profile.club.title }}</a>
+                            {% if user == request.user %}
+                            <a class="mb-3" href="{% url 'jd:club_detail' user.profile.club.title %}">지원 중 : {{ user.profile.club.title }}</a>
+                            {% endif %}
                         {% endif %}
                     {% endif %}
-                    <button type="button" class="btn btn-outline-primary" style="width: 100%">
+                    {% if user == request.user %}
+                    <button type="button" class="btn btn-outline-primary" style="width: 100%" onclick="location.href='{% url 'account:update_user' user.username %}'">
                         <i class="bi bi-pencil-square" style="margin-right: 2%"></i>내 정보 수정
                     </button>
+                    {% endif %}
                 </div>
                 <div style="width: 67%;">
                     <div>
