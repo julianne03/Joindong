@@ -8,7 +8,7 @@ class Profile(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE)
     st_num = models.IntegerField(null=True)
     nickname = models.CharField(max_length=20)
-    introduction = models.CharField(blank=True, max_length=100)
+    introduction = models.TextField(blank=True)
     image = models.ImageField(blank=True, upload_to="profile_image/")
     phone_num = models.CharField(max_length=20)
     club = models.ForeignKey(Club, on_delete=models.CASCADE, null=True, blank=True)
