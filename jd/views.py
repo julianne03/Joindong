@@ -21,6 +21,9 @@ def club_list(request):
 
 @login_required(login_url='account:login')
 def create_club(request):
+    if request.user.profile.club:
+        context = {'message': '이미 동아리에 가입되어 있습니다!'}
+        return render(request, 'error_page.html', context)
     if request.method == 'POST':
         form = ClubForm(request.POST, request.FILES)
         if form.is_valid():
