@@ -12,4 +12,6 @@ urlpatterns = [
     path('club/modify/<str:club_title>/', views.update_club, name='club_update'),
     path('club/message/modify/<str:club_title>/', views.update_club_message, name='club_message_update'),
     path('club/<str:user_name>/', views.my_club, name='my_club'),
+    path('club/apply/<str:club_title>/', views.apply_club, name='club_apply'),
+    path('club/cancel/apply/<str:club_title>/', views.cancel_apply_club, name='club_cancel_apply'),
 ]
