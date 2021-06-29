@@ -1,0 +1,49 @@
+{% extends 'base.html' %}
+{% load static %}
+{% load jd_filter %}
+
+{% block title %}Main{% endblock %}
+
+{% block content %}
+    <div style="margin-left: 10%; margin-right: 10%">
+        <div class="detail-box" style="margin-top: 5%">
+            <div>
+                <span style="font-weight: 700; font-size: 2rem;"><mark>{{ user.profile.nickname }}님의 마이페이지</mark></span>
+            </div>
+            <div style="display: flex; flex-direction: row; width: 100%; height: auto;">
+                <div style="display: flex; flex-direction: column; float: left; width: 30%; height: auto; margin-right: 3%; align-self: center;">
+                    <img src="{{ user.profile.image.url }}" style="max-width: 100%; height: auto !important; border-radius: 50%;">
+                    <span class="fs-1 fw-bold">{{ user.profile.nickname }}님</span>
+                    <span class="fs-4 text-muted mb-3">{{ user.username }}</span>
+                    <span class="fs-6 text-muted">개인정보</span>
+                    <span class="fs-5">{{ user.profile.st_num }}</span>
+                    <span class="fs-5">{{ user.profile.phone_num }}</span>
+                    <span class="fs-5 mb-3">{{ user.email }}</span>
+
+                    {% if user.profile.club %}
+                        <span class="fs-6 text-muted">동아리</span>
+                        {% if user.profile.is_club_staff %}
+                        <a class="mb-3" href="{% url 'jd:club_detail' user.profile.club.title %}">{{ user.profile.club.title }}</a>
+                        {% else %}
+                        <a class="mb-3" href="{% url 'jd:club_detail' user.profile.club.title %}">지원 중 : {{ user.profile.club.title }}</a>
+                        {% endif %}
+                    {% endif %}
+                    <button type="button" class="btn btn-outline-primary" style="width: 100%">
+                        <i class="bi bi-pencil-square" style="margin-right: 2%"></i>내 정보 수정
+                    </button>
+                </div>
+                <div style="width: 67%;">
+                    <div>
+                        <span style="font-weight: 700; font-size: 1.3rem;">README.md</span><br/>
+                        <div style="border: 1px solid #e1e4e8; padding: 3%; border-radius: 5px; margin-top: 2%; min-height: 700px;">
+                            <span>{{ user.profile.introduction|mark }}</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+
+{% endblock %}
