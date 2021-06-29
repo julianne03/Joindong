@@ -42,7 +42,7 @@ def create_club(request):
 def detail_club(request, club_title):
     club = Club.objects.get(title=club_title)
     members = User.objects.filter(profile__club=club, profile__is_club_staff=True)
-    context = {'club': club, 'members': members}
+    context = {'club': club, 'members': members, 'user': request.user}
     return render(request, 'jd/club_detail.html', context)
 
 
@@ -82,6 +82,7 @@ def update_club(request, club_title):
     return render(request, 'jd/create_club.html', context)
 
 
+@login_required(login_url='account:login')
 def update_club_message(request, club_title):
     club = get_object_or_404(Club, title=club_title)
     message, is_created = Message.objects.get_or_create(club=club)
@@ -97,3 +98,26 @@ def update_club_message(request, club_title):
         form = MessageForm(instance=message)
     context = {'form': form}
     return render(request, 'jd/create_club_message.html', context)
+
+
+@login_required(login_url='account:login')
+def apply_club(request, club_title):
+    club = get_object_or_404(Club, title=club_title)
+    profile = Profile.objects.get(user=request.user)
+    # club -> detail page club
+    profile.club = club
+    # is_club_staff -> False
+    profile.save()
+    return redirect('jd:club_detail', club_title=club.title)
+
+
+@login_required(login_url='account:login')
+def cancel_apply_club(request, club_title):
+    print('cancel')
+    club = get_object_or_404(Club, title=club_title)
+    profile = Profile.objects.get(user=request.user)
+    # club -> None or Null
+    profile.club = None
+    # is_club_staff -> False
+    profile.save()
+    return redirect('jd:club_detail', club_title=club.title)
