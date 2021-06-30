@@ -1,8 +1,10 @@
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.models import User
+from django.core.mail import EmailMessage
 from django.shortcuts import render, redirect, get_object_or_404
 
 from account.models import Profile
+from config import settings
 from jd.forms import ClubForm, MessageForm
 from jd.models import Club, Message
 
@@ -29,7 +31,8 @@ def create_club(request):
         if form.is_valid():
             club = form.save(commit=False)
             club.creator = request.user
-            club.main_poster = request.FILES['main_poster_image']
+            if 'main_poster' in request.FILES:
+                club.main_poster = request.FILES['main_poster']
             club.save()
             profile = Profile.objects.get(user=request.user)
             profile.club = club
@@ -76,7 +79,8 @@ def update_club(request, club_title):
         if form.is_valid():
             club = form.save(commit=False)
             club.creator = request.user
-            club.main_poster = request.FILES['main_poster_image']
+            if 'main_poster' in request.FILES:
+                club.main_poster = request.FILES['main_poster']
             club.save()
             return redirect('jd:my_club', user_name=request.user.username)
     else:
@@ -131,3 +135,21 @@ def my_page(request, user_name):
     user = User.objects.get(username=user_name)
     context = {'user': user}
     return render(request, 'jd/my_page.html', context)
+
+
+def delete_club(request, club_title):
+    club = get_object_or_404(Club, title=club_title)
+    if request.user != club.creator:
+        return redirect('jd:my_club', club_title=club_title)
+    club.delete()
+    return redirect('jd:index')
+
+
+@login_required(login_url='account:login')
+def send_email(request, user_email):
+    subject = "message"
+    to = ["s2019w33@e-mirim.hs.kr"]
+    from_email = settings.EMAIL_HOST_USER
+    message = "sending email testing"
+    EmailMessage(subject=subject, body=message, to=to,
+                 from_email=from_email).send()
