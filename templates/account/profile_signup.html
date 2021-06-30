@@ -1,16 +1,24 @@
 {% extends 'base.html' %}
 {% block content %}
     <div class="center-box">
-        <h3>Sign up</h3>
-        <form method="post" class="login_form" enctype="multipart/form-data">
-                {% csrf_token %}
-                {% include 'form_errors.html' %}
-                <h3>{{ profile.user.username }}님, 환영합니다</h3>
-                <input type="number" placeholder="Enter hakbun" name="st_num" value="{{ form.st_num.value|default_if_none:'' }}">
-                <input type="text" placeholder="Enter nickname" name="nickname" value="{{ form.nickname.value|default_if_none:'' }}">
-                <input type="tel" placeholder="Enter phone number" name="phone_num" value="{{ form.phone_num.value|default_if_none:'' }}">
-                <input type="file" name="profile_image" value="{{ form.image.value|default_if_none:'' }}" accept="image/*">
-                <button type="submit" class="login_btn">Finish</button>
+        <form method="post" class="login_form" style="display: flex; flex-direction: column; width: 40%; align-self: center" enctype="multipart/form-data">
+            {% csrf_token %}
+            {% include 'form_errors.html' %}
+            <h3 class="mt-5 text-center" style="margin-bottom: 10%">{{ profile.user.username }}님, 환영합니다</h3>
+            <div class="mt-3">
+                <input class="form-control form-control-lg" type="number" placeholder="학번을 입력해주세요" name="st_num"
+                       id="st_num" value="{{ profile_form.st_num.value|default_if_none:'' }}">
+            </div>
+            <div class="mt-3">
+                <input class="form-control form-control-lg" type="text" placeholder="이름을 입력해주세요" name="nickname"
+                       id="nickname" value="{{ profile_form.nickname.value|default_if_none:'' }}">
+            </div>
+            <div class="mt-3 mb-3">
+                <input class="form-control form-control-lg" type="tel" placeholder="전화번호를 입력해주세요" name="phone_num"
+                       id="phone_num" value="{{ profile_form.phone_num.value|default_if_none:'' }}">
+            </div>
+            {{ form.image }}
+            <button type="submit" style="width: 100%; margin-top: 10%" class="login_btn">Finish</button>
         </form>
     </div>
 {% endblock %}

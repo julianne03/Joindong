@@ -15,10 +15,7 @@
             </div>
             <div class="mb-3">
                 <label for="main_poster_image" class="form-label">동아리 메인 포스터</label>
-                <input type="file" style="background-color: rgb(239,242,243); border: none" class="form-control"
-                       name="main_poster_image" id="main_poster_image"
-                       value="{{ form.main_poster.value|default_if_none:'' }}"
-                       accept="image/*">
+                {{ form.main_poster }}
             </div>
             <div class="mb-3">
                 <label for="description" class="form-label">동아리 간단 설명</label>
@@ -46,9 +43,7 @@
             </div>
             <div class="mb-3">
                 <label for="deadline" class="form-label">동아리 모집기간</label>
-                <input type="date" style="background-color: rgb(239,242,243); border: none" class="form-control"
-                       placeholder="모집기간을 입력해주세요" name="deadline" id="deadline"
-                       value="{{ form.deadline.value|default_if_none:'' }}">
+                {{ form.deadline }}
             </div>
             <div class="mb-3">
                 <label for="head_num" class="form-label">동아리 모집인원</label>

@@ -9,8 +9,10 @@
     </div>
     <div style="margin-left: 10%; margin-right: 10%">
         <div class="detail-box" style="margin-top: 5%">
-            <div>
+            <div style="display: flex; flex-direction: row; justify-content: space-between">
                 <span style="font-weight: 700; font-size: 2rem;"><mark>{{ club.title }} 관리 페이지</mark></span>
+                <i class="bi bi-trash" style="font-size: 2rem"
+                   onclick="location.href='{% url 'jd:club_delete' club.title %}'"></i>
             </div>
             <div style="display: flex; flex-direction: row; width: 100%; height: auto">
                 <div style="display: flex; flex-direction: column; float: left; width: 30%; height: auto; margin-right: 3%">
@@ -93,7 +95,7 @@
                             <td>{{ applicant.profile.st_num }}</td>
                             <td>{{ applicant.profile.nickname }}</td>
                             <td>{{ applicant.email }}</td>
-                            <td style="font-size: 1.5rem"><i class="bi bi-check-square"></i>&nbsp;&nbsp;<i
+                            <td style="font-size: 1.5rem"><i class="bi bi-check-square" onclick="location.href='{% url 'jd:send_club_plan_email' applicant.email %}'"></i>&nbsp;&nbsp;<i
                                     class="bi bi-x-square-fill"></i></td>
                         </tr>
                     {% endfor %}
