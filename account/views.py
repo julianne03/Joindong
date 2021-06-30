@@ -29,7 +29,8 @@ def profile_signup(request):
         form.user = request.user
         if form.is_valid():
             profile = form.save(commit=False)
-            profile.image = request.FILES['profile_image']
+            if 'image' in  request.FILES:
+                form.user.profile.image = request.FILES['image']
             profile.save()
             return redirect('jd:index')
         return redirect('account:profile_signup')
@@ -47,7 +48,8 @@ def update_user(request, user_name):
         if user_change_form.is_valid() and profile_form.is_valid():
             user_change_form.save()
             profile = profile_form.save(commit=False)
-            profile.image = request.FILES['profile_image']
+            if 'image' in request.FILES:
+                profile.user.profile.image = request.FILES['image']
             profile.save()
             return redirect('jd:my_page', user_name=request.user.username)
         return redirect('account:update_user', user_name=request.user.username)
@@ -57,3 +59,11 @@ def update_user(request, user_name):
         profile_form = ProfileForm(instance=profile)
         context = {'user_change_form': user_change_form, 'profile_form': profile_form, 'profile': profile}
         return render(request, 'account/update_user.html', context)
+
+
+def delete_user(request, user_name):
+    user = get_object_or_404(User, username=user_name)
+    if request.user != user:
+        return redirect('jd:my_page', user_name=user_name)
+    user.delete()
+    return redirect('jd:index')
