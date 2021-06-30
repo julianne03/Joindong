@@ -6,7 +6,7 @@ from django.utils import timezone
 class Club(models.Model):
     title = models.CharField(max_length=30)
     creator = models.ForeignKey(User, on_delete=models.CASCADE, blank=True)
-    main_poster = models.ImageField(upload_to='main_poster', blank=True)
+    main_poster = models.ImageField(upload_to='main_poster', null=True)
     description = models.TextField(max_length=100)
     activities = models.TextField()
     good_things = models.TextField()
