@@ -31,3 +31,12 @@ class CustomUserChangeForm(UserChangeForm):
     class Meta:
         model = User
         fields = ['email', 'username']
+
+
+class SearchForm(forms.ModelForm):
+    s_user_name = forms.CharField(required=False)
+
+    class Meta:
+        model = User
+        fields = ['s_user_name']
+
