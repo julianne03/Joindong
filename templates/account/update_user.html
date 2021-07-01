@@ -1,8 +1,19 @@
 {% extends 'base.html' %}
 {% block content %}
+    {% if messages %}
+        <div>
+            {% for message in messages %}
+                <div class="alert alert-success">
+                    {{ message.message }}
+                </div>
+            {% endfor %}
+        </div>
+    {% endif %}
     <div class="center-box">
         <h3 style="margin-top: 5%">내 정보 수정</h3>
-        <form style="width: 40%" method="post" action="{% url 'account:update_user' request.user.username %}" enctype="multipart/form-data">
+
+        <form style="width: 40%" method="post" action="{% url 'account:update_user' request.user.username %}"
+              enctype="multipart/form-data">
             {% csrf_token %}
             {% include 'form_errors.html' %}
             <div class="mt-3">

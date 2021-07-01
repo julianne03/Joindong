@@ -1,7 +1,18 @@
 {% extends 'base.html' %}
 {% block content %}
+    {% if messages %}
+        <div>
+            {% for message in messages %}
+                <div class="alert alert-success">
+                    {{ message.message }}
+                </div>
+            {% endfor %}
+        </div>
+    {% endif %}
     <div class="center-box">
-        <form method="post" class="login_form" style="display: flex; flex-direction: column; width: 40%; align-self: center" enctype="multipart/form-data">
+        <form method="post" class="login_form"
+              style="display: flex; flex-direction: column; width: 40%; align-self: center"
+              enctype="multipart/form-data">
             {% csrf_token %}
             {% include 'form_errors.html' %}
             <h3 class="mt-5 text-center" style="margin-bottom: 10%">{{ profile.user.username }}님, 환영합니다</h3>

@@ -1,9 +1,10 @@
+from django.contrib import messages
 from django.contrib.auth import authenticate, login
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.models import User
 from django.shortcuts import render, redirect, get_object_or_404
 
-from account.forms import UserForm, ProfileForm, CustomUserChangeForm
+from account.forms import UserForm, ProfileForm, CustomUserChangeForm, SearchForm
 from account.models import Profile
 
 
@@ -16,6 +17,7 @@ def signup(request):
             raw_password = form.cleaned_data.get('password1')
             user = authenticate(username=username, password=raw_password)
             login(request, user)
+            messages.success(request, '프로필 정보를 입력해주세요!')
             return redirect('account:profile_signup')
     else:
         form = UserForm()
@@ -29,9 +31,10 @@ def profile_signup(request):
         form.user = request.user
         if form.is_valid():
             profile = form.save(commit=False)
-            if 'image' in  request.FILES:
+            if 'image' in request.FILES:
                 form.user.profile.image = request.FILES['image']
             profile.save()
+            messages.success(request, '회원가입이 성공적으로 완료되었습니다!')
             return redirect('jd:index')
         return redirect('account:profile_signup')
     else:
@@ -51,6 +54,7 @@ def update_user(request, user_name):
             if 'image' in request.FILES:
                 profile.user.profile.image = request.FILES['image']
             profile.save()
+            messages.success(request, '회원 정보가 정상적으로 수정되었습니다!')
             return redirect('jd:my_page', user_name=request.user.username)
         return redirect('account:update_user', user_name=request.user.username)
     else:
@@ -61,9 +65,24 @@ def update_user(request, user_name):
         return render(request, 'account/update_user.html', context)
 
 
+@login_required(login_url='account:login')
 def delete_user(request, user_name):
     user = get_object_or_404(User, username=user_name)
     if request.user != user:
         return redirect('jd:my_page', user_name=user_name)
     user.delete()
+    messages.success(request, '정상적으로 회원 탈퇴가 완료되었습니다!')
     return redirect('jd:index')
+
+
+@login_required(login_url='account:login')
+def search_user(request):
+    if request.method == 'POST':
+        form = SearchForm(request.POST)
+        if form.is_valid():
+            username = form.cleaned_data.get('username')
+            print(username)
+            return redirect('jd:my_page', username)
+    else:
+        form = SearchForm()
+    return render(request, 'jd/index.html')

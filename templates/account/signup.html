@@ -1,5 +1,14 @@
 {% extends 'base.html' %}
 {% block content %}
+    {% if messages %}
+        <div>
+            {% for message in messages %}
+                <div class="alert alert-success">
+                    {{ message.message }}
+                </div>
+            {% endfor %}
+        </div>
+    {% endif %}
     <div class="center-box">
         <h3 style="margin-top: 7%">회원가입</h3>
         <form style="width: 40%" method="post" action="{% url 'account:signup' %}">
