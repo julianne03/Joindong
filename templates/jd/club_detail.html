@@ -7,6 +7,15 @@
     <div style="width: 100%; background-color: #ff7675; padding-top: 0.5%; padding-bottom: 0.5%; text-align: center">
         <span style="color: white;">모집기간 : {{ club.deadline }}까지</span>
     </div>
+    {% if messages %}
+        <div>
+            {% for message in messages %}
+                <div class="alert alert-success">
+                    {{ message.message }}
+                </div>
+            {% endfor %}
+        </div>
+    {% endif %}
     <div style="margin-left: 10%; margin-right: 10%">
         <div class="detail-box" style="margin-top: 5%">
             <div>
@@ -15,18 +24,21 @@
             <div style="display: flex; flex-direction: row; width: 100%; height: auto">
                 <div style="display: flex; flex-direction: column; float: left; width: 30%; height: auto; margin-right: 3%">
                     <img src="{{ club.main_poster.url }}" style="width: 100%; height: auto"><br/>
-                    {% if user.profile.club %}
+                    {% if user.profile.club and user.profile.club == club %}
                         {% if user.profile.is_club_staff %}
-                            <button type="button" class="btn btn-outline-primary" style="width: 100%; margin-top: -3%" onclick="location.href='{% url 'jd:my_club' user.username %}'">
+                            <button type="button" class="btn btn-outline-primary" style="width: 100%; margin-top: -3%"
+                                    onclick="location.href='{% url 'jd:my_club' user.username %}'">
                                 관리 페이지 이동하기
                             </button>
                         {% else %}
-                            <button type="button" class="btn btn-outline-primary" style="width: 100%; margin-top: -3%" onclick="location.href='{% url 'jd:club_cancel_apply' club.title %}'">
+                            <button type="button" class="btn btn-outline-primary" style="width: 100%; margin-top: -3%"
+                                    onclick="location.href='{% url 'jd:club_cancel_apply' club.title %}'">
                                 지원 취소하기
                             </button>
                         {% endif %}
                     {% else %}
-                        <button type="button" class="btn btn-outline-primary" style="width: 100%; margin-top: -3%" onclick="location.href='{% url 'jd:club_apply' club.title %}'">
+                        <button type="button" class="btn btn-outline-primary" style="width: 100%; margin-top: -3%"
+                                onclick="location.href='{% url 'jd:club_apply' club.title %}'">
                             지원하기
                         </button>
                     {% endif %}
@@ -75,6 +87,7 @@
                             <td>{{ member.profile.st_num }}</td>
                             <td>{{ member.profile.nickname }}</td>
                             <td>{{ member.email }}</td>
+                            <td></td>
                         </tr>
                     {% endfor %}
                     </tbody>

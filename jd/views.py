@@ -1,3 +1,4 @@
+from django.contrib import messages
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.models import User
 from django.core.mail import EmailMessage
@@ -38,7 +39,8 @@ def create_club(request):
             profile.club = club
             profile.is_club_staff = True
             profile.save()
-        return redirect('jd:club_detail', club_title=club.title)
+            messages.success(request, '동아리가 정상적으로 수정되었습니다!')
+        return redirect('jd:club_message_update', club_title=club.title)
     else:
         form = ClubForm()
     return render(request, 'jd/create_club.html', {'form': form})
@@ -82,6 +84,7 @@ def update_club(request, club_title):
             if 'main_poster' in request.FILES:
                 club.main_poster = request.FILES['main_poster']
             club.save()
+            messages.success(request, '동아리 정보가 정상적으로 수정되었습니다!')
             return redirect('jd:my_club', user_name=request.user.username)
     else:
         form = ClubForm(instance=club)
@@ -100,6 +103,7 @@ def update_club_message(request, club_title):
         form = MessageForm(request.POST, instance=message)
         if form.is_valid():
             message.save()
+            messages.success(request, '동아리 메세지가 정상적으로 수정되었습니다!')
             return redirect('jd:my_club', user_name=request.user.username)
     else:
         form = MessageForm(instance=message)

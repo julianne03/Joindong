@@ -5,6 +5,15 @@
 {% block title %}Main{% endblock %}
 
 {% block content %}
+    {% if messages %}
+        <div>
+            {% for message in messages %}
+                <div class="alert alert-success">
+                    {{ message.message }}
+                </div>
+            {% endfor %}
+        </div>
+    {% endif %}
     <div style="margin-left: 10%; margin-right: 10%">
         <div class="detail-box" style="margin-top: 5%">
             <div>

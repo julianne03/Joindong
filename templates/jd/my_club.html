@@ -95,8 +95,8 @@
                             <td>{{ applicant.profile.st_num }}</td>
                             <td>{{ applicant.profile.nickname }}</td>
                             <td>{{ applicant.email }}</td>
-                            <td style="font-size: 1.5rem"><i class="bi bi-check-square" onclick="location.href='{% url 'jd:send_club_plan_email' applicant.email %}'"></i>&nbsp;&nbsp;<i
-                                    class="bi bi-x-square-fill"></i></td>
+                            <td style="font-size: 1.5rem"><i style="cursor: pointer" class="bi bi-check-square" onclick="location.href='{% url 'jd:send_club_pass_email' applicant.username %}'"></i>&nbsp;&nbsp;<i
+                                    style="cursor: pointer" class="bi bi-x-square-fill" onclick="location.href='{% url 'jd:send_club_unpass_email' applicant.username %}'"></i></td>
                         </tr>
                     {% endfor %}
                     </tbody>
