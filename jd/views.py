@@ -115,10 +115,22 @@ def update_club_message(request, club_title):
 def apply_club(request, club_title):
     club = get_object_or_404(Club, title=club_title)
     profile = Profile.objects.get(user=request.user)
+    # 관리자일 경우
+    if profile.club and profile.is_club_staff:
+        context = {'message': '이미 동아리에 소속되어 있어 지원이 불가능 합니다!'}
+        return render(request, 'error_page.html', context)
     # club -> detail page club
     profile.club = club
     # is_club_staff -> False
     profile.save()
+    # 일정 이메일 보내기
+    subject = f"[쪼인동]{club.title} 동아리 일정 관련 메일입니다."
+    to = [request.user.email]
+    from_email = settings.EMAIL_HOST_USER
+    message = club.message.plan_message
+    EmailMessage(subject=subject, body=message, to=to,
+                 from_email=from_email).send()
+    messages.success(request, f'{club_title} 동아리 신청이 완료되었습니다! 일정 메일을 확인해주세요!')
     return redirect('jd:club_detail', club_title=club.title)
 
 
@@ -141,19 +153,47 @@ def my_page(request, user_name):
     return render(request, 'jd/my_page.html', context)
 
 
+@login_required(login_url='account:login')
 def delete_club(request, club_title):
     club = get_object_or_404(Club, title=club_title)
     if request.user != club.creator:
-        return redirect('jd:my_club', club_title=club_title)
+        return redirect('jd:my_club', user_name=request.user.username)
+    profile = get_object_or_404(Profile, user=request.user)
+    profile.club = None
+    profile.is_club_staff = False
+    profile.save()
     club.delete()
     return redirect('jd:index')
 
 
 @login_required(login_url='account:login')
-def send_email(request, user_email):
-    subject = "message"
-    to = ["s2019w33@e-mirim.hs.kr"]
+def send_pass_email(request, user_name):
+    # 합격 이메일 보내기
+    user = get_object_or_404(User, username=user_name)
+    print(user.profile.club)
+    subject = f"[쪼인동]{user.profile.club.title} 동아리 면접 결과 관련 메일입니다."
+    to = [user.email]
     from_email = settings.EMAIL_HOST_USER
-    message = "sending email testing"
+    message = user.profile.club.message.pass_message
     EmailMessage(subject=subject, body=message, to=to,
                  from_email=from_email).send()
+    profile = get_object_or_404(Profile, user=user)
+    profile.is_club_staff = True
+    profile.save()
+    return redirect('jd:my_club', user_name=request.user.username)
+
+
+@login_required(login_url='account:login')
+def send_unpass_email(request, user_name):
+    # 합격 이메일 보내기
+    user = get_object_or_404(User, username=user_name)
+    subject = f"[쪼인동]{user.profile.club.title} 동아리 면접 결과 관련 메일입니다."
+    to = [user.email]
+    from_email = settings.EMAIL_HOST_USER
+    message = user.profile.club.message.non_pass_message
+    EmailMessage(subject=subject, body=message, to=to,
+                 from_email=from_email).send()
+    profile = get_object_or_404(Profile, user=user)
+    profile.club = None
+    profile.save()
+    return redirect('jd:my_club', user_name=request.user.username)
