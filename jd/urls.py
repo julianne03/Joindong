@@ -16,5 +16,6 @@ urlpatterns = [
     path('mypage/<str:user_name>/', views.my_page, name='my_page'),
     path('club/apply/<str:club_title>/', views.apply_club, name='club_apply'),
     path('club/cancel/apply/<str:club_title>/', views.cancel_apply_club, name='club_cancel_apply'),
-    path('club/plan/send/email/<str:user_email>/', views.send_email, name='send_club_plan_email'),
+    path('club/pass/send/email/<str:user_name>/', views.send_pass_email, name='send_club_pass_email'),
+    path('club/unpass/send/email/<str:user_name>/', views.send_unpass_email, name='send_club_unpass_email'),
 ]
