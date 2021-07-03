@@ -2,7 +2,8 @@ from django.contrib import messages
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.models import User
 from django.core.mail import EmailMessage
-from django.shortcuts import render, redirect, get_object_or_404
+from django.shortcuts import render, redirect, get_object_or_404, render_to_response
+from django.template import RequestContext
 
 from account.models import Profile
 from config import settings
@@ -148,7 +149,7 @@ def cancel_apply_club(request, club_title):
 
 @login_required(login_url='account:login')
 def my_page(request, user_name):
-    user = User.objects.get(username=user_name)
+    user = get_object_or_404(User, username=user_name)
     context = {'user': user}
     return render(request, 'jd/my_page.html', context)
 
@@ -197,3 +198,11 @@ def send_unpass_email(request, user_name):
     profile.club = None
     profile.save()
     return redirect('jd:my_club', user_name=request.user.username)
+
+
+def page_not_found(request, *args, **argv):
+    return render(request, 'jd/page_404.html', status=404)
+
+
+def server_error(request, *args, **argv):
+    return render(request, 'jd/page_500.html', status=500)
