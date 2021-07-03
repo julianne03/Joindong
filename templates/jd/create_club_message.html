@@ -39,9 +39,7 @@
             </div>
             <div class="mb-3">
                 <label for="send_date" class="form-label">메세지 전송 날짜</label>
-                <input type="date" style="background-color: rgb(239,242,243); border: none" class="form-control"
-                       placeholder="메세지를 보낼 날짜를 입력해주세요" name="send_date" id="send_date"
-                       value="{{ form.send_date.value|default_if_none:'' }}">
+                {{ form.send_date }}
             </div>
             <button type="submit" style="margin-top: 5%; margin-bottom: 3%; width: 100%" class="login_btn">Create</button>
         </form>
