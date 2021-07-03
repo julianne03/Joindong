@@ -1,4 +1,7 @@
 {% extends 'base.html' %}
+
+{% block title %}Create Club{% endblock %}
+
 {% block content %}
     {% if messages %}
         <div>
@@ -60,7 +63,8 @@
                        placeholder="모집인원을 입력해주세요" name="head_num" id="head_num"
                        value="{{ form.head_num.value|default_if_none:'' }}">
             </div>
-            <button type="submit" style="margin-top: 5%; margin-bottom: 3%; width: 100%" class="login_btn">Create</button>
+            <button type="submit" style="margin-top: 5%; margin-bottom: 3%; width: 100%" class="login_btn">Create
+            </button>
         </form>
     </div>
 {% endblock %}
