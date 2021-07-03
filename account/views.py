@@ -77,12 +77,8 @@ def delete_user(request, user_name):
 
 @login_required(login_url='account:login')
 def search_user(request):
-    if request.method == 'POST':
-        form = SearchForm(request.POST)
-        if form.is_valid():
-            username = form.cleaned_data.get('username')
-            print(username)
-            return redirect('jd:my_page', username)
-    else:
-        form = SearchForm()
+    form = SearchForm(request.POST)
+    if form.is_valid():
+        username = request.GET.get('s_user_name')
+        return redirect('jd:my_page', user_name=username)
     return render(request, 'jd/index.html')
