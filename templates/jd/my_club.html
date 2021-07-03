@@ -4,6 +4,15 @@
 {% block title %}My Club{% endblock %}
 
 {% block content %}
+    {% if messages %}
+        <div>
+            {% for message in messages %}
+                <div class="alert alert-success">
+                    {{ message.message }}
+                </div>
+            {% endfor %}
+        </div>
+    {% endif %}
     <div style="width: 100%; background-color: #ff7675; padding-top: 0.5%; padding-bottom: 0.5%; text-align: center">
         <span style="color: white;">모집기간 : {{ club.deadline }}까지</span>
     </div>

@@ -204,5 +204,5 @@ def page_not_found(request, exception):
     return render(request, 'jd/page_404.html')
 
 
-def server_error(request, exception):
+def server_error(request, *args, **argv):
     return render(request, 'jd/page_500.html')
