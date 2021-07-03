@@ -200,9 +200,9 @@ def send_unpass_email(request, user_name):
     return redirect('jd:my_club', user_name=request.user.username)
 
 
-def page_not_found(request, *args, **argv):
-    return render(request, 'jd/page_404.html', status=404)
+def page_not_found(request, exception):
+    return render(request, 'jd/page_404.html')
 
 
-def server_error(request, *args, **argv):
-    return render(request, 'jd/page_500.html', status=500)
+def server_error(request, exception):
+    return render(request, 'jd/page_500.html')
