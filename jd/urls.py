@@ -1,11 +1,5 @@
 from django.urls import path
-from django.conf.urls import (
-    handler404, handler500
-)
 from jd import views
-
-handler404 = 'jd.views.page_not_found'
-handler500 = 'jd.views.server_error'
 
 app_name = 'jd'
 
