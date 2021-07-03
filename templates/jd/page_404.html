@@ -1,0 +1,12 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}404 Page{% endblock %}
+
+{% block content %}
+    <div style="height: 80vh; display: flex; flex-direction: column; align-items: center; justify-content: center">
+        <span style="font-size: 10rem; font-weight: 900">404</span>
+    <span class="fs-3">찾을 수 없는 페이지입니다.</span>
+    <span class="fs-3">요청하신 페이지가 사라졌거나, 잘못된 경로를 이용하셨어요 :)</span>
+    </div>
+{% endblock %}
