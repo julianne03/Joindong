@@ -27,7 +27,7 @@ class ClubForm(forms.ModelForm):
 
 class MessageForm(forms.ModelForm):
     def __init__(self, *args, **kwargs):
-        super(ClubForm, self).__init__(*args, **kwargs)
+        super(MessageForm, self).__init__(*args, **kwargs)
         for visible in self.visible_fields():
             visible.field.widget.attrs['class'] = 'form-control'
 
