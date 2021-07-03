@@ -1,4 +1,6 @@
 # JJoindong (쪼인동)
+<img width="500" alt="조인동 메인 페이지" src="https://user-images.githubusercontent.com/59498977/124351484-940a1c00-dc35-11eb-8e1e-f8c7ce8a5dc8.png">
+
 직접 동아리를 조직하거나 지원할 수 있는 웹사이트입니다!<br>
 동아리를 현재 운영하고 있는 학생들이 자신의 동아리를 홍보하여 모집하고,<br>
 지원하고 싶은 학생들은 그러한 동아리들을 보고 직접 지원할 수 있는 웹사이트입니다.<br>
